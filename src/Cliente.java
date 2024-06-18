@@ -14,26 +14,21 @@ public class Cliente {
         this.dni = dni;
         cuentas = new ArrayList<>();
         efectivoTotal = 0;
-
     }
 
     public boolean menuCliente() {
-
         System.out.println("-- Gestión cliente " + this.nombre + " " + this.apellido + " --");
         System.out.println("1. Alta cuenta");
         System.out.println("2. Gestionar cuenta");
         System.out.println("9. Volver al menú principal");
         int opcion = Utilidades.leerEntero("opción deseada");
-
         switch (opcion) {
             case 1:
                 this.altaCuenta();
                 break;
-
             case 2:
                 this.gestionCuenta();
                 break;
-
             case 9:
                 App.menuPrincipal();
                 return true;
@@ -61,47 +56,39 @@ public class Cliente {
         System.out.println("Cuentas del cliente " + this.nombre + " " + this.apellido + ":");
         for (Cuenta it : this.cuentas) {
             System.out.println("- " + cuentas.indexOf(it) + " " + it.getNumero() + " Saldo: " + it.getSaldo());
-        }
+            }
         int indiceCuenta = Utilidades.leerEntero("el índice de la cuenta deseada");
-
-        if (!cuentas.isEmpty()) {
+        if (indiceCuenta <= ((cuentas.size())-1)) {
             Cuenta cuenta = buscarCuenta(cuentas.get(indiceCuenta).getNumero());
-
             System.out.println("-- Gestión de cuenta--");
             System.out.println("1. Ingresar efectivo");
             System.out.println("2. Retirar efectivo");
             System.out.println("3. Baja cuenta");
             System.out.println("9. Volver a menú de cliente");
             int opcion = Utilidades.leerEntero("opción deseada");
-
             switch (opcion) {
                 case 1:
                     ingresarEfectivo(cuenta);
                     break;
-
                 case 2:
                     retirarEfectivo(cuenta);
                     break;
-
                 case 3:
                     bajaCuenta(cuenta);
                     break;
-
                 case 9:
                     return;
-
                 default:
                     System.out.println("Esa opción no existe");
                     break;
-            }
+                }
         } else {
-            System.out.println("No existen cuentas");
+            System.out.println("No existe tal cuenta");
         }
     }
 
     public void ingresarEfectivo(Cuenta cuenta) {
-        int ingreso = Utilidades.leerEntero("cantidad a ingresar");
-
+        float ingreso = Utilidades.leerFloat("cantidad a ingresar");
         if (ingreso > 0) {
             cuenta.setSaldo(ingreso + cuenta.getSaldo());
             System.out.println("Ingreso realizado correctamente. Nuevo saldo: " + cuenta.getSaldo());
@@ -111,12 +98,10 @@ public class Cliente {
     }
 
     public void retirarEfectivo(Cuenta cuenta) {
-        int extracto = Utilidades.leerEntero("cantidad a retirar");
-
+        float extracto = Utilidades.leerFloat("cantidad a retirar");
         if (extracto > 0 && extracto <= cuenta.getSaldo()) {
             cuenta.setSaldo(cuenta.getSaldo() - extracto);
             System.out.println("Extracto realizado correctamente");
-
         } else {
             System.out.println("Saldo insuficiente");
         }
@@ -129,11 +114,9 @@ public class Cliente {
 
     public int generarNumeroCuenta() {
         Random random = new Random();
-
         int min = 100000;
         int max = 200000;
         int numeroCuenta = random.nextInt(max - min + 1) + min;
-
         return numeroCuenta;
     }
 

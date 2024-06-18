@@ -11,7 +11,6 @@ public class App {
     }
 
     public static boolean menuPrincipal() {
-
         System.out.println("-- Menú Principal --");
         System.out.println("1. Alta cliente");
         System.out.println("2. Gestión cliente");
@@ -23,23 +22,19 @@ public class App {
             case 1:
                 Sucursal.altaCliente();
                 break;
-
             case 2:
                 Sucursal.gestionCliente();
                 break;
-
             case 3:
                 Sucursal.listaClientesPorEfectivo();
-
+                break;
             case 9:
                 System.out.println("Hasta pronto");
                 return true;
-
             default:
                 System.out.println("No existe esa opción");
                 break;
         }
-
         return false;
     }
 }
